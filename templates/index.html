@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astute Email Signature Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", Arial, sans-serif;
+        background: #f0f2f5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48px 20px 64px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+      .header img {
+        height: 36px;
+      }
+      .header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #2d4f8a;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 36px 32px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.09);
+        width: 100%;
+        max-width: 560px;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 15px;
+        font-family: inherit;
+        border: 1.5px solid #d0d5dd;
+        border-radius: 8px;
+        background: #fff;
+        color: #111;
+        cursor: pointer;
+        appearance: auto;
+        transition: border-color 0.15s;
+      }
+      select:focus {
+        outline: none;
+        border-color: #2d4f8a;
+      }
+
+      #signature-section {
+        margin-top: 32px;
+      }
+
+      .preview-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 10px;
+      }
+
+      .preview-box {
+        background: #e8e8e8;
+        padding: 18px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+
+      #copy-btn {
+        display: block;
+        width: 100%;
+        margin-top: 22px;
+        padding: 13px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        background: #2d4f8a;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          transform 0.1s;
+      }
+      #copy-btn:hover {
+        background: #1e3a6b;
+      }
+      #copy-btn:active {
+        transform: scale(0.98);
+      }
+      #copy-btn.copied {
+        background: #1a7a40;
+      }
+
+      .instructions {
+        margin-top: 22px;
+        padding: 14px 18px;
+        background: #f4f7ff;
+        border-left: 3px solid #2d4f8a;
+        border-radius: 0 6px 6px 0;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.65;
+      }
+      .instructions strong {
+        color: #2d4f8a;
+      }
+      .instructions ol {
+        padding-left: 18px;
+        margin-top: 8px;
+      }
+      .instructions li {
+        margin-bottom: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img
+        src="https://astuteng.com/assets/Email/Astute.png"
+        alt="Astute Engineering"
+      />
+      <h1>Email Signature Generator</h1>
+    </div>
+
+    <div class="card">
+      <label class="field-label" for="name-select">Select your name</label>
+      <select id="name-select">
+        <option value="">— Choose a name —</option>
+        {% for name in names %}
+        <option value="{{ name }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="signature-section" style="display: none">
+        <div class="preview-label" style="margin-top: 28px">Preview</div>
+        <div class="preview-box">
+          <div id="signature-preview"></div>
+        </div>
+
+        <button id="copy-btn">Copy Signature to Clipboard</button>
+
+        <div class="instructions">
+          <strong>Adding to Outlook:</strong>
+          <ol>
+            <li>Click <strong>Copy Signature to Clipboard</strong> above</li>
+            <li>
+              Open Outlook &rarr;
+              <strong
+                >File &rarr; Settings &rarr; Accounts &rarr; Signatures</strong
+              >
+            </li>
+            <li>Click "<strong>+ Add signature</strong>"</li>
+            <li>Press <strong>Ctrl+V</strong> to paste</li>
+            <li>Select
+              <ol style="list-style-type: none">
+                <li><input type="checkbox" checked  /> Set as default for new messages</li>
+                <li><input type="checkbox" checked  /> Set as default for replies/forwards</li>
+              </ol>
+        </li>
+            <li>Click <strong>OK</strong> to save</li>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const nameSelect = document.getElementById("name-select");
+      const section = document.getElementById("signature-section");
+      const preview = document.getElementById("signature-preview");
+      const copyBtn = document.getElementById("copy-btn");
+
+      nameSelect.addEventListener("change", async () => {
+        const name = nameSelect.value;
+        if (!name) {
+          section.style.display = "none";
+          return;
+        }
+
+        const res = await fetch("/signature?name=" + encodeURIComponent(name));
+        if (!res.ok) return;
+        preview.innerHTML = await res.text();
+        section.style.display = "block";
+      });
+
+      function showCopied() {
+        copyBtn.textContent = "✓ Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.textContent = "Copy Signature to Clipboard";
+          copyBtn.classList.remove("copied");
+        }, 2500);
+      }
+
+      copyBtn.addEventListener("click", async () => {
+        const html = preview.innerHTML;
+
+        // Modern API — works in Chrome/Edge
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "text/html": new Blob([html], { type: "text/html" }),
+            }),
+          ]);
+          showCopied();
+          return;
+        } catch (_) {}
+
+        // Fallback — select the rendered DOM node and execCommand (Firefox, Safari)
+        try {
+          const range = document.createRange();
+          range.selectNodeContents(preview);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand("copy");
+          sel.removeAllRanges();
+          showCopied();
+          return;
+        } catch (_) {}
+
+        alert(
+          "Could not copy automatically.\nPlease manually select the signature preview and press Ctrl+C.",
+        );
+      });
+    </script>
+  </body>
+</html>

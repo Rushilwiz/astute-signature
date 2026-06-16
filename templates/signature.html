@@ -1,0 +1,380 @@
+<!-- MASTER TABLE WRAPPER -->
+<table
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  style="
+    width: 333px;
+    background-color: transparent;
+    font-family: &quot;Inter&quot;, Arial, sans-serif;
+  "
+>
+  <tr>
+    <td>
+      <!-- BODY TABLE -->
+      <table cellpadding="0" cellspacing="0" border="0" style="width: 333px">
+        <!-- TOP ROW: Name & Title (Left) + Power Grid (Right) -->
+        <tr>
+          <td valign="top" style="padding-top: 13px; padding-left: 16px">
+            <div
+              style="
+                font-family: &quot;Inter&quot;, Arial, sans-serif;
+                font-size: 10px;
+                font-weight: 700;
+                color: #000;
+                line-height: 1;
+                white-space: nowrap;
+                padding-bottom: 7px;
+              "
+            >
+              Best regards,
+            </div>
+            <div
+              style="
+                font-family: &quot;Inter&quot;, Arial, sans-serif;
+                font-size: 12pt;
+                font-weight: 700;
+                color: #2d4f8a;
+                line-height: 1;
+                white-space: nowrap;
+              "
+            >
+              {{ display_name }}
+            </div>
+            <div
+              style="
+                font-family: &quot;Inter&quot;, Arial, sans-serif;
+                font-size: 11px;
+                font-weight: 700;
+                color: #111111;
+                line-height: 1;
+                white-space: nowrap;
+                padding-top: 4px;
+              "
+            >
+              {{ position }}
+            </div>
+            {% if licensed %}
+            <div
+              style="
+                font-family: &quot;Inter&quot;, Arial, sans-serif;
+                font-size: 8px;
+                font-weight: 700;
+                color: #333333;
+                line-height: 1;
+                white-space: nowrap;
+                padding-top: 5px;
+              "
+            >
+              PE Licensed: {{ licensed }}
+            </div>
+            {% endif %}
+          </td>
+          <td
+            align="right"
+            valign="top"
+            style="padding-top: 17px; padding-right: 19px"
+          >
+            <img
+              src="https://astuteng.com/assets/Email/Powergrid.png"
+              width="100"
+              height="51"
+              alt="Power Grid Graphic"
+              style="display: block; border: none"
+            />
+          </td>
+        </tr>
+
+        <!-- MIDDLE ROW: Phone Numbers -->
+        <tr>
+          <td colspan="2" align="center" style="padding-top: 13px">
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <!-- Work Phone -->
+                <td valign="middle" style="padding-right: 4px">
+                  <img
+                    src="https://astuteng.com/assets/Email/Phone.png"
+                    width="11"
+                    height="11"
+                    alt="Phone"
+                    style="display: block; border: none"
+                  />
+                </td>
+                <td
+                  valign="middle"
+                  style="{{ 'padding-right: 11px; ' if cell }}font-family: &quot;Inter&quot;, Arial, sans-serif; font-size: 8px; font-weight: 700; color: #111111; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums;"
+                >
+                  <a
+                    href="tel:{{ phone_tel }}"
+                    style="color: inherit; text-decoration: none"
+                    >{{ phone }}</a
+                  >
+                </td>
+                {% if cell %}
+                <!-- Cell -->
+                <td valign="middle" style="padding-right: 4px">
+                  <img
+                    src="https://astuteng.com/assets/Email/Mobile.png"
+                    width="11"
+                    height="11"
+                    alt="Mobile"
+                    style="display: block; border: none"
+                  />
+                </td>
+                <td
+                  valign="middle"
+                  style="
+                    font-family: &quot;Inter&quot;, Arial, sans-serif;
+                    font-size: 8px;
+                    font-weight: 700;
+                    color: #111111;
+                    line-height: 1;
+                    white-space: nowrap;
+                    font-variant-numeric: tabular-nums;
+                  "
+                >
+                  <a
+                    href="tel:{{ cell_tel }}"
+                    style="color: inherit; text-decoration: none"
+                    >{{ cell }}</a
+                  >
+                </td>
+                {% endif %}
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ADDRESS CHANGE BANNER -->
+        <tr>
+          <td colspan="2" align="center">
+            <div
+              style="
+                padding: 3px 0;
+                margin: 5px 0;
+                font-family: &quot;Inter&quot;, Arial, sans-serif;
+                font-size: 8px;
+                font-weight: bold;
+                color: #ff0000;
+                background-color: #e8e8e8;
+                white-space: nowrap;
+              "
+            >
+              We have moved! Our address has changed.
+            </div>
+          </td>
+        </tr>
+
+        <!-- BOTTOM ROW: 3-column Layout -->
+        <tr>
+          <td colspan="2" style="padding-top: 0; padding-bottom: 7px">
+            <table
+              cellpadding="0"
+              cellspacing="0"
+              border="0"
+              style="width: 333px"
+            >
+              <tr>
+                <!-- 1. Left Spacing -->
+                <td
+                  width="8"
+                  style="min-width: 8px; font-size: 1px; line-height: 1px"
+                >
+                  &nbsp;
+                </td>
+                <!-- 2. Logo -->
+                <td
+                  width="75"
+                  align="left"
+                  valign="middle"
+                  style="min-width: 75px"
+                >
+                  <img
+                    src="https://astuteng.com/assets/Email/Astute.png"
+                    width="75"
+                    height="35"
+                    alt="Company Logo"
+                    style="display: block; border: none"
+                  />
+                </td>
+                <!-- 3. Spacer -->
+                <td
+                  width="12"
+                  style="min-width: 12px; font-size: 1px; line-height: 1px"
+                >
+                  &nbsp;
+                </td>
+                <!-- 4. Spacer -->
+                <td
+                  width="4"
+                  style="min-width: 4px; font-size: 1px; line-height: 1px"
+                >
+                  &nbsp;
+                </td>
+                <!-- 5. Address Block -->
+                <td
+                  width="88"
+                  align="center"
+                  valign="middle"
+                  style="
+                    min-width: 88px;
+                    font-family: &quot;Inter&quot;, Arial, sans-serif;
+                    font-size: 8px;
+                    font-weight: 800;
+                    color: #2d4f8a;
+                    line-height: 1.4;
+                  "
+                >
+                  8614 Westwood Center Dr, Suite 440<br />
+                  Vienna, VA 22182
+                </td>
+                <!-- 6. Spacer -->
+                <td
+                  width="3"
+                  style="min-width: 3px; font-size: 1px; line-height: 1px"
+                >
+                  &nbsp;
+                </td>
+                <!-- 7. Spacer -->
+                <td
+                  width="8"
+                  style="min-width: 8px; font-size: 1px; line-height: 1px"
+                >
+                  &nbsp;
+                </td>
+                <!-- 8. Contact Icons -->
+                <td valign="middle" align="left">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td
+                        valign="middle"
+                        style="padding-bottom: 7px; padding-right: 3px"
+                      >
+                        <img
+                          src="https://astuteng.com/assets/Email/Email.png"
+                          width="8"
+                          height="8"
+                          alt="Email"
+                          style="display: block; border: none"
+                        />
+                      </td>
+                      <td
+                        valign="middle"
+                        style="
+                          padding-bottom: 7px;
+                          font-family: &quot;Inter&quot;, Arial, sans-serif;
+                          font-size: 8px;
+                          font-weight: 700;
+                          color: #111111;
+                          line-height: 1;
+                          white-space: nowrap;
+                        "
+                      >
+                        <a
+                          href="mailto:{{ email }}"
+                          style="color: inherit; text-decoration: none"
+                          >{{ email }}</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        valign="middle"
+                        style="padding-bottom: 7px; padding-right: 3px"
+                      >
+                        <img
+                          src="https://astuteng.com/assets/Email/Website.png"
+                          width="8"
+                          height="8"
+                          alt="Website"
+                          style="display: block; border: none"
+                        />
+                      </td>
+                      <td
+                        valign="middle"
+                        style="
+                          padding-bottom: 7px;
+                          font-family: &quot;Inter&quot;, Arial, sans-serif;
+                          font-size: 8px;
+                          font-weight: 700;
+                          color: #111111;
+                          line-height: 1;
+                          white-space: nowrap;
+                        "
+                      >
+                        <a
+                          href="https://astuteng.com"
+                          style="color: inherit; text-decoration: none"
+                          >www.astuteng.com</a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="middle" style="padding-right: 3px">
+                        <img
+                          src="https://astuteng.com/assets/Email/Linkedin.png"
+                          width="8"
+                          height="8"
+                          alt="LinkedIn"
+                          style="display: block; border: none"
+                        />
+                      </td>
+                      <td
+                        valign="middle"
+                        style="
+                          font-family: &quot;Inter&quot;, Arial, sans-serif;
+                          font-size: 8px;
+                          font-weight: 700;
+                          color: #111111;
+                          line-height: 1;
+                          white-space: nowrap;
+                        "
+                      >
+                        <a
+                          href="{{ linkedin_url }}"
+                          style="color: inherit; text-decoration: none"
+                          >{{ linkedin_name }}</a
+                        >
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- FOOTER BANNER -->
+  <tr>
+    <td>
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        style="width: 333px; background-color: #2b4882"
+      >
+        <tr>
+          <td
+            align="center"
+            valign="middle"
+            height="8"
+            style="
+              font-family: &quot;Inter&quot;, Arial, sans-serif;
+              font-size: 11px;
+              font-weight: normal;
+              padding: 5px 0;
+              background: #2b4882;
+              color: #e8e8e8;
+              white-space: nowrap;
+            "
+          >
+            Powering Excellence, Safely.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
